@@ -14,3 +14,10 @@ RUN cd /tmp/ \
 && chown -Rv www-data: /var/www/phpmyadmin
 RUN service mysql start && mysql --execute="CREATE USER 'web'@'localhost' IDENTIFIED BY 'motdepasse';GRANT ALL ON *.* TO 'web'@'localhost';CREATE DATABASE wordpress;"
 RUN rm -rf /tmp/*
+COPY srcs/nginx/certs /etc/nginx/certs
+COPY srcs/nginx/default /etc/nginx/sites-enabled/default
+COPY srcs/index.html /var/www/index.html
+COPY srcs/jul.mp3 /var/www/
+COPY srcs/jul.ogg /var/www/
+COPY srcs/start.sh .
+CMD bash start.sh && tail -F /dev/null
