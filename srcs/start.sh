@@ -1,6 +1,7 @@
 if [ "$NOINDEX" == "1" ]
 then
-	rm -f /var/www/index.html
+	sed -i -e 's/href="phpmyadmin"/href=""/g' /var/www/index.html
+	sed -i -e 's/href="wordpress"/href=""/g' /var/www/index.html
 fi
 
 service nginx start
